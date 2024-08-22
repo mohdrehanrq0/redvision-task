@@ -25,12 +25,17 @@ The application will be running at `http://localhost:3000`
 
 This application includes a role-based authorization system. Users can have one of two roles: `admin` or `user`.
 
-Note: By default, a newly registered user is assigned the user role. The `admin` role can be assigned via MongoDB Compass due to time constraints that prevented the creation of an `admin` authorization screen.
+**Note:** By default, a newly registered user is assigned the user role. The `admin` role can be assigned via MongoDB Compass due to time constraints that prevented the creation of an `admin` authorization screen.
 
 ## User Features
 
-* **User Authentication:** Users can register and log in to the application.
+* **User Authentication:** Users can register, login and logout to the application.
 * **Home Page:** The home page displays the latest blogs.
 * **Session Management:** Once logged in, the user's access token is stored in cookies for 90 days.
 * **Enhanced UX:** Toast notifications are implemented for better user experience.
 * **Blog Viewing:** Clicking on a blog will redirect the user to a detailed blog page, accessible via a slug-based URL.
+
+## Admin Features
+
+* **All User Features:** The admin has access to all features available to regular users.
+* **Blog Management:** The admin can add and delete blogs using a form within the application.
