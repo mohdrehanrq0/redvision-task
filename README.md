@@ -1,4 +1,4 @@
-# RedVision Technology Task
+# Frontend Task
 
 ## Installation guide
 

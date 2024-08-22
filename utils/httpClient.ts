@@ -1,7 +1,9 @@
-import axios from 'axios';
-import Router from 'next/router';
+import axios from "axios";
+import Router from "next/router";
 
-const BASE_URL = "http://localhost:4000/api/v1/";
+// const BASE_URL = "http://localhost:4000/api/v1/";
+const BASE_URL =
+  "https://redvision-task-backend-production.up.railway.app/api/v1/";
 export const HEADERS = {
   "Content-Type": "application/json",
 };
