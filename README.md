@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#RedVision Technology Task
 
-## Getting Started
+##Installation guide
 
-First, run the development server:
+###1. Clone the Repository
+
+To get started, clone the repository using the following command:
+
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+    git clone https://github.com/mohdrehanrq0/redvision-task-frontend.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##2. Install Dependencies and Start the Application
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Navigate to the redvision-task-frontend folder in your terminal and run the following commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm i
+npm run dev
+```
 
-## Learn More
+The application will be running at `http://localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+##Feture
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This application includes a role-based authorization system. Users can have one of two roles: `admin` or `user`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Note: By default, a newly registered user is assigned the user role. The `admin` role can be assigned via MongoDB Compass due to time constraints that prevented the creation of an `admin` authorization screen.
 
-## Deploy on Vercel
+##User Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* **User Authentication:** Users can register and log in to the application.
+* **Home Page:** The home page displays the latest blogs.
+* **Session Management:** Once logged in, the user's access token is stored in cookies for 90 days.
+* **Enhanced UX:** Toast notifications are implemented for better user experience.
+* **Blog Viewing:** Clicking on a blog will redirect the user to a detailed blog page, accessible via a slug-based URL.
