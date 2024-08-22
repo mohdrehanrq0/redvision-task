@@ -34,6 +34,8 @@ This application includes a role-based authorization system. Users can have one 
 * **Session Management:** Once logged in, the user's access token is stored in cookies for 90 days.
 * **Enhanced UX:** Toast notifications are implemented for better user experience.
 * **Blog Viewing:** Clicking on a blog will redirect the user to a detailed blog page, accessible via a slug-based URL.
+* **State Management:** Global context is used with useContext and useReducer hooks to manage user data when logged in.
+* **API Management:** The application uses an httpClient file that contains Axios interceptor code for better API call management, token handling, and error management.
 
 ## Admin Features
 
