@@ -14,6 +14,8 @@ To get started, clone the repository using the following command:
 
 Navigate to the redvision-task-frontend folder in your terminal and run the following commands:
 
+**Note:** Go to `/utils/httpClient.ts` and uncomment line 4 i.e `const BASE_URL = "http://localhost:4000/api/v1/";` and comment line 5 i.e `const BASE_URL = "https://redvision-task-backend-production.up.railway.app/api/v1/";` because this URL is deployed url.
+
 ```bash
 npm i
 npm run dev
