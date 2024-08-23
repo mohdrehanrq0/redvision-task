@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-import { getAllBlogs } from '@/services/blog';
+import { getAllBlogs } from "@/services/blog";
 
-import BlogCard from './blogCard';
+import BlogCardSkeleton from "../skeleton/blogCardSkeleton";
+import BlogCard from "./blogCard";
 
 export interface TBlogData {
   _id: string;
@@ -35,9 +36,16 @@ const BlogWrapper = () => {
     <>
       <h1 className="px-8 font-bold text-3xl mt-8">Latest Blogs</h1>
       <div className="p-8 grid grid-flow-row grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {blog?.map((e, i) => (
-          <BlogCard key={i} data={e} />
-        ))}
+        {blog ? (
+          blog?.map((e, i) => <BlogCard key={i} data={e} />)
+        ) : (
+          <>
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+          </>
+        )}
       </div>
     </>
   );

@@ -1,13 +1,13 @@
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
 
-import { TBlogData } from './blogWrapper';
+import { TBlogData } from "./blogWrapper";
 
 const BlogCard = ({ data }: { data: TBlogData }) => {
   const router = useRouter();
   return (
-    <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] mt-4 border-2">
+    <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif]  border-2">
       <div className="h-[200px] border-b-2">
         <Image
           src={data.image}

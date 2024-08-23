@@ -1,29 +1,53 @@
 "use client";
-import { subtle } from "crypto";
-import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useContext, useState } from "react";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { GlobalContext } from "@/context/globalContext/globalContext";
 import { TGlobalContext } from "@/context/globalContext/interface";
-import { createBlog, uploadImage } from "@/services/blog";
+import {
+  createBlog,
+  getSpecificBlogs,
+  updateBlog,
+  uploadImage,
+} from "@/services/blog";
 
-const AddBlog = () => {
+interface IBlogData {
+  _id?: string;
+  title?: string;
+  subtitle?: string;
+  content?: string;
+  image?: string;
+  slug?: string;
+  userId?: string;
+}
+
+const EditBlog = () => {
   const router = useRouter();
+  const param = useParams();
   const { user } = useContext(GlobalContext) as TGlobalContext;
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<{
-    title?: string;
-    subtitle?: string;
-    content?: string;
-    image?: string;
-  }>({
-    title: undefined,
-    subtitle: undefined,
-    content: undefined,
-    image: undefined,
-  });
+  const [data, setData] = useState<IBlogData>({});
   const customId = "custom-id-blog";
+
+  useEffect(() => {
+    if (param.slug) {
+      getSpecificBlogs(
+        String(param.slug),
+        (res) => {
+          if (res.status === 200) {
+            setData(res.data.blog);
+          }
+        },
+        (err) => {
+          console.log(err);
+          err.response.data.message &&
+            toast.error(err.response.data.message, {});
+        }
+      );
+    }
+  }, [param]);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e?.target?.files![0];
@@ -54,33 +78,30 @@ const AddBlog = () => {
     }
   };
 
-  const handleAddBlogClick = () => {
+  const handleUpdateBlogClick = () => {
     if (
-      data.title &&
-      data.subtitle &&
-      data.content &&
-      data.image &&
-      data.title !== "" &&
-      data.subtitle !== "" &&
-      data.content !== "" &&
-      data.image !== ""
+      data?.title !== "" &&
+      data?.subtitle !== "" &&
+      data?.content !== "" &&
+      data?.image !== ""
     ) {
       setLoading(true);
       let payload = {
-        title: data.title,
-        subtitle: data.subtitle,
-        content: data.content,
-        image: data.image,
+        title: data.title as string,
+        subtitle: data.subtitle as string,
+        content: data.content as string,
+        image: data.image as string,
         userId: String(user._id),
       };
-      createBlog(
+      updateBlog(
+        data._id as string,
         payload,
         (res) => {
           if (res.status === 200) {
-            toast.success("Blog added successfully", {
+            toast.success("Blog updated successfully", {
               toastId: customId,
             });
-            router.push("/blogs");
+            router.push(`/blogs/${param.slug}`);
             setLoading(false);
           }
         },
@@ -103,12 +124,12 @@ const AddBlog = () => {
             <div>
               <p
                 className="absolute text-blue-700 cursor-pointer"
-                onClick={() => router.push("/blogs")}
+                onClick={() => router.push(`/blogs/${param.slug}`)}
               >
                 Back
               </p>
               <h2 className="text-gray-800 text-center text-2xl font-bold">
-                Add Blog
+                Update Blog
               </h2>
             </div>
             <form className="mt-8 space-y-4">
@@ -175,25 +196,26 @@ const AddBlog = () => {
                     className="w-full text-gray-500 font-medium text-base bg-gray-100 file:cursor-pointer cursor-pointer file:border-0 file:py-2.5 file:px-4 file:mr-4 file:bg-blue-600 file:hover:bg-blue-700 file:text-white rounded"
                   />
                 </div>
+                <div className="mt-2">
+                  {data?.image ? (
+                    <Image
+                      src={String(data?.image)}
+                      width="120"
+                      height={100}
+                      alt=""
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
 
               <div className="!mt-8">
                 <button
                   type="button"
                   className="w-full py-3 px-4 text-sm tracking-wide rounded-lg disabled:bg-gray-500 text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-                  disabled={
-                    !(
-                      data.title &&
-                      data.subtitle &&
-                      data.content &&
-                      data.image &&
-                      data.title !== "" &&
-                      data.subtitle !== "" &&
-                      data.content !== "" &&
-                      data.image !== ""
-                    ) || loading
-                  }
-                  onClick={handleAddBlogClick}
+                  disabled={loading}
+                  onClick={handleUpdateBlogClick}
                 >
                   {loading ? (
                     <svg
@@ -213,7 +235,7 @@ const AddBlog = () => {
                       />
                     </svg>
                   ) : (
-                    "Add Blog"
+                    "Update Blog"
                   )}
                 </button>
               </div>
@@ -225,4 +247,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default EditBlog;

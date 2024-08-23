@@ -12,12 +12,12 @@ To get started, clone the repository using the following command:
 
 ## 2. Install Dependencies and Start the Application
 
-Navigate to the redvision-task-frontend folder in your terminal and run the following commands:
-
 **Note:** Go to `/utils/httpClient.ts` and uncomment line 4 i.e `const BASE_URL = "http://localhost:4000/api/v1/";` and comment line 5 i.e `const BASE_URL = "https://redvision-task-backend-production.up.railway.app/api/v1/";` because this URL is deployed url.
 
+Navigate to the redvision-task-frontend folder in your terminal and run the following commands:
+
 ```bash
-npm i
+npm install
 npm run dev
 ```
 
@@ -34,7 +34,7 @@ This application includes a role-based authorization system. Users can have one 
 * **User Authentication:** Users can register, login and logout to the application.
 * **Home Page:** The home page displays the latest blogs.
 * **Session Management:** Once logged in, the user's access token is stored in cookies for 90 days.
-* **Enhanced UX:** Toast notifications are implemented for better user experience.
+* **Enhanced UX:** Toast notifications, Skeleton UI, Loading button on API Call are implemented for better user experience.
 * **Blog Viewing:** Clicking on a blog will redirect the user to a detailed blog page, accessible via a slug-based URL.
 * **State Management:** Global context is used with useContext and useReducer hooks to manage user data when logged in.
 * **API Management:** The application uses an httpClient file that contains Axios interceptor code for better API call management, token handling, and error management.
@@ -42,4 +42,4 @@ This application includes a role-based authorization system. Users can have one 
 ## Admin Features
 
 * **All User Features:** The admin has access to all features available to regular users.
-* **Blog Management:** The admin can add and delete blogs using a form within the application.
+* **Blog Management:** The admin can add,edit and delete blogs using a form within the application.
